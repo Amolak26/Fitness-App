@@ -90,7 +90,7 @@ function getNutritionalAdvice(gender, weight, activityLevel) {
     return advice;
 }
 
-// Function to handle form submission
+// Function to handle form submission and disable inputs after submission
 document.getElementById("fitnessForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -101,7 +101,6 @@ document.getElementById("fitnessForm").addEventListener("submit", function(event
     const activity = document.getElementById("activity").value;
 
     const calories = calculateCalories(gender, weight, height, age, activity);
-
     const advice = getNutritionalAdvice(gender, weight, activity);
 
     document.getElementById("result").innerHTML = `
@@ -118,4 +117,25 @@ document.getElementById("fitnessForm").addEventListener("submit", function(event
         <h3>Nutritional Advice:</h3>
         <p>${advice}</p>
     `;
+
+    // Disable all form inputs and submit button after submission
+    document.querySelectorAll("input, select, button").forEach(function(element) {
+        element.disabled = true;
+    });
+
+    // Add reset button
+    const resetButton = document.createElement("button");
+    resetButton.textContent = "Reset";
+    resetButton.style.marginTop = "20px";
+    resetButton.onclick = function() {
+        document.querySelectorAll("input, select, button").forEach(function(element) {
+            element.disabled = false;
+        });
+        document.getElementById("fitnessForm").reset();
+        document.getElementById("result").innerHTML = "";
+        document.getElementById("advice").innerHTML = "";
+        resetButton.remove(); // Remove the reset button after resetting the form
+    };
+
+    document.body.appendChild(resetButton);
 });
