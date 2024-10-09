@@ -59,3 +59,18 @@ button:hover {
     padding: 15px;
     border-radius: 10px;
 }
+
+input:focus, select:focus {
+    outline: none;
+    border: 1px solid #00796b; /* Teal border on focus */
+    box-shadow: 0 0 5px rgba(0, 121, 107, 0.5); /* Subtle glow on focus */
+}
+
+#result, #advice {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
