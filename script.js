@@ -94,15 +94,20 @@ function getNutritionalAdvice(gender, weight, activityLevel) {
 document.getElementById("fitnessForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
+    // Get the form inputs
     const age = parseInt(document.getElementById("age").value);
     const height = parseInt(document.getElementById("height").value);
     const weight = parseInt(document.getElementById("weight").value);
     const gender = document.getElementById("gender").value;
     const activity = document.getElementById("activity").value;
 
+    // Calculate calories
     const calories = calculateCalories(gender, weight, height, age, activity);
+
+    // Get personalized nutritional advice
     const advice = getNutritionalAdvice(gender, weight, activity);
 
+    // Display the results
     document.getElementById("result").innerHTML = `
         <p>Calories to maintain weight: ${calories.maintainCalories} kcal/day</p>
         <p>Calories for mild weight loss: ${calories.mildWeightLossCalories} kcal/day</p>
@@ -113,6 +118,7 @@ document.getElementById("fitnessForm").addEventListener("submit", function(event
         <p>Calories for fast weight gain: ${calories.fastWeightGainCalories} kcal/day</p>
     `;
 
+    // Display personalized nutritional advice
     document.getElementById("advice").innerHTML = `
         <h3>Nutritional Advice:</h3>
         <p>${advice}</p>
